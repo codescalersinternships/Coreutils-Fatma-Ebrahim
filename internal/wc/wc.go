@@ -1,27 +1,20 @@
-package main
+package wc
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"os"
 	"strings"
 )
 
-// Reading files requires checking most calls for errors.
-// This helper will streamline our error checks below.
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func main() {
-	lptr := flag.Bool("l", false, "display number of lines only")
-	wptr := flag.Bool("w", false, "display number of words only")
-	cptr := flag.Bool("c", false, "display number of chars only")
-	flag.Parse()
-	filename := flag.Args()[0]
+func Wc(filename string, lptr,wptr,cptr *bool) {
+
 
 	l := 0
 	w := 0

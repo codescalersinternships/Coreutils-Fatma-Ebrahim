@@ -2,21 +2,16 @@ package main
 
 import (
 	"flag"
-	"fmt"
+	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/yes"
 )
 
 func main() {
 	flag.Parse()
-	var repeat string
+	repeat := ""
 
 	if len(flag.Args()) == 1 {
 		repeat = flag.Args()[0]
-	} else {
-		repeat = "y"
 	}
-
-	for {
-		fmt.Println(repeat)
-	}
+	yes.Yes(repeat)
 
 }

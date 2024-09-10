@@ -1,25 +1,19 @@
-package main
+package tail
 
 import (
 	"bufio"
 	"fmt"
 	"os"
-	"flag"
 )
 
-// Reading files requires checking most calls for errors.
-// This helper will streamline our error checks below.
+
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func main() {
-	nptr := flag.Int("n", 10, "number of lines read")
-	flag.Parse()
-	filename := flag.Args()[0]
-	n := *nptr
+func Tail(filename string, n int) {
 
 	f, err := os.Open(filename)
 	check(err)

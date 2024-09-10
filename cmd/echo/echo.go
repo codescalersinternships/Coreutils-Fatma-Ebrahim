@@ -1,11 +1,9 @@
 package main
 
 import (
-	
 	"flag"
-	"fmt"
+	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/echo"
 	"strings"
-	
 )
 
 func main() {
@@ -13,12 +11,6 @@ func main() {
 	nptr := flag.Bool("n", false, "omit echoing trailing newline")
 	flag.Parse()
 	input := strings.Join(flag.Args(), " ")
-	
 	n := *nptr
-	if n {
-		fmt.Print( input)
-
-	} else{
-		fmt.Println(input)
-	}
+	echo.Echo(input,n)
 }

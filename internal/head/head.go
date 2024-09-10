@@ -1,27 +1,19 @@
-package main
+package head
 
 import (
 	"bufio"
-	"flag"
 	"fmt"
 	"os"
 )
 
-// Reading files requires checking most calls for errors.
-// This helper will streamline our error checks below.
 func check(e error) {
 	if e != nil {
 		panic(e)
 	}
 }
 
-func main() {
+func Head(filename string, n int) {
 
-	nptr := flag.Bool("n", false, "number output lines")
-	flag.Parse()
-	filename := flag.Args()[0]
-	n := *nptr
-	
 	f, err := os.Open(filename)
 	check(err)
 	scanner := bufio.NewScanner(f)
@@ -32,9 +24,10 @@ func main() {
 		s = append(s, scanner.Text())
 	}
 
-	if n {
-		for j := 0; j < len(s); j++ {
-			fmt.Println(" ",j+1," ",s[j])
+	if n < len(s) {
+		h := s[:n]
+		for j := 0; j < len(h); j++ {
+			fmt.Println(h[j])
 		}
 
 	} else {
