@@ -19,3 +19,15 @@ This repository contains simple implementations of some core Unix utilities:
 
 5. **echo**: Prints the provided arguments to the standard output.  
    - Option: `-n` to omit the trailing newline.
+
+7. **tree**: Displays the directory structure in a tree-like format.  
+   - Options:  
+     - `-L` to limit the display depth of the directory tree
+
+6. **env**: Prints the environment variables.  
+
+8. **true**: Always returns an exit status of 0 (success).  
+
+9. **false**: Always returns an exit status of 1 (failure).  
+
+10. **yes**: Repeatedly prints a specified string, or `y` by default.  
