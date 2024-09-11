@@ -1,10 +1,9 @@
 package main
 
 import (
-	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/false"
+	"os"
 )
 
 func main() {
-
-	false.False()
+	os.Exit(1)
 }

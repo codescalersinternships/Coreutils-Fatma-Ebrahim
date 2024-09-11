@@ -6,35 +6,18 @@ import (
 	"os"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
-func Head(filename string, n int) {
+func Head(filename string, n int) error {
 
 	f, err := os.Open(filename)
-	check(err)
+	if err != nil {
+		return fmt.Errorf("Can't open the file with path %q due error: %w", filename, err)
+	}
+	defer f.Close()
 	scanner := bufio.NewScanner(f)
-
-	s := make([]string, 0)
-
-	for scanner.Scan() {
-		s = append(s, scanner.Text())
+	for scanner.Scan() && n != 0 {
+		fmt.Println(scanner.Text())
+		n--
 	}
+	return nil
 
-	if n < len(s) {
-		h := s[:n]
-		for j := 0; j < len(h); j++ {
-			fmt.Println(h[j])
-		}
-
-	} else {
-		for j := 0; j < len(s); j++ {
-			fmt.Println(s[j])
-		}
-	}
-
-	f.Close()
 }

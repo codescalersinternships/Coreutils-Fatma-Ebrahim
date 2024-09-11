@@ -7,45 +7,45 @@ import (
 	"strings"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
+func Wc(filename string, l, w, c bool, scanner *bufio.Scanner) error {
+
+	linecount := 0
+	wordcount := 0
+	charcount := 0
+
+	if scanner == nil {
+		f, err := os.Open(filename)
+		if err != nil {
+			return fmt.Errorf("Can't open the file with path %q due error: %w", filename, err)
+		}
+		defer f.Close()
+		scanner = bufio.NewScanner(f)
 	}
-}
-
-func Wc(filename string, lptr,wptr,cptr *bool) {
-
-
-	l := 0
-	w := 0
-	c := 0
-
-	f, err := os.Open(filename)
-	check(err)
-	scanner := bufio.NewScanner(f)
 
 	for scanner.Scan() {
 		line := scanner.Text()
-		words := strings.Split(line, " ")
-		chars := strings.Split(line, "")
-		w += len(words)
-		c += len(chars)
-		l++
+		words := strings.Fields(line)
+		wordcount += len(words)
+		charcount += len(line) + 2
+		linecount++
 	}
 
-	switch {
-	case *lptr:
-		fmt.Print(l, " ",filename)
-	case *wptr:
-		fmt.Print(w, " ",filename)
-	case *cptr:
-		fmt.Print(c, " ",filename)
-	default:
-		fmt.Println(l, w, c,filename)
+	if !l && !w && !c {
+		fmt.Println(linecount, wordcount, charcount, filename)
 
+	} else {
+		if l {
+			fmt.Print(linecount, "  ")
+		}
+		if w {
+			fmt.Print(wordcount, "  ")
+		}
+		if c {
+			fmt.Print(charcount, "  ")
+		}
+		fmt.Print(filename)
 	}
 
-	
-	f.Close()
+	return nil
 
 }

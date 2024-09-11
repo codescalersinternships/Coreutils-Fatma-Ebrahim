@@ -2,15 +2,14 @@ package main
 
 import (
 	"flag"
-	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/echo"
 	"strings"
+	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/echo"
 )
 
 func main() {
-
-	nptr := flag.Bool("n", false, "omit echoing trailing newline")
+	n := false
+	flag.BoolVar(&n, "n", false, "omit echoing trailing newline")
 	flag.Parse()
 	input := strings.Join(flag.Args(), " ")
-	n := *nptr
-	echo.Echo(input,n)
+	echo.Echo(input, n)
 }

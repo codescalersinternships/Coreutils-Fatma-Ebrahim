@@ -5,13 +5,7 @@ import (
 )
 
 func Yes(repeat string) {
-
-	if repeat == "" {
-		repeat = "y"
-	}
-
 	for {
 		fmt.Println(repeat)
 	}
-
 }

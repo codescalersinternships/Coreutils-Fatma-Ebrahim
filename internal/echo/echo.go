@@ -5,7 +5,6 @@ import (
 )
 
 func Echo(input string, n bool) {
-
 	if n {
 		fmt.Print(input)
 

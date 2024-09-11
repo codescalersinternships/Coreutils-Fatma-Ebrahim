@@ -3,28 +3,51 @@ package tree
 import (
 	"fmt"
 	"os"
-	"strings"
 )
-
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
+func Tree (dir string,level int) error{
+   var dirscount int
+   var filescount int
+   err:=tree(dir,level,level,"",&dirscount,&filescount)
+   if err!=nil{
+	return err
+   }
+   fmt.Printf("%d directories, %d files",dirscount,filescount)
+   return nil
 }
-
-func Tree(dir string, level, depth int) {
+func tree(dir string, level, depth int, prefix string, dirscount, filescount *int) error {
 	if level == 0 {
-		return
+		return nil
 	}
 	level--
-	c, err := os.ReadDir(dir)
-	check(err)
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		return fmt.Errorf("Can't Read directory with path %q due error: %w", dir, err)
+	}
 
-	for _, entry := range c {
-		fmt.Println(strings.Repeat("-----", depth-level), entry.Name())
-		if entry.IsDir() {
-			Tree(dir+"/"+entry.Name(), level, depth)
+	for index, entry := range entries {
+		isLast := index == len(entries)-1
+		branch := ""
+		if isLast {
+			branch = "└── "
+		} else {
+			branch = "├── "
 		}
 
+		if entry.IsDir() {
+			*dirscount++
+			fmt.Println(prefix + branch + entry.Name())
+			newPrefix := prefix
+			if isLast {
+				newPrefix += "    "
+			} else {
+				newPrefix += "│   "
+			}
+
+			_ = tree(dir+"/"+entry.Name(), level, depth, newPrefix,dirscount,filescount)
+		} else {
+			*filescount++
+			fmt.Println(prefix + branch + entry.Name())
+		}
 	}
+	return nil
 }
