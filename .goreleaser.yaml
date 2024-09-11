@@ -1,0 +1,118 @@
+version: 2
+
+before:
+  hooks:
+    # Ensure your go.mod file is tidy before building
+    - go mod tidy
+env:
+    - CGO_ENABLED=0
+builds:
+  - id: cat
+    main: ./cmd/cat/cat.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: cat  
+
+  - id: echo
+    main: ./cmd/echo/echo.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: echo
+  
+  - id: env
+    main: ./cmd/env/env.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: env
+
+  - id: false
+    main: ./cmd/false/false.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: false
+
+  - id: head
+    main: ./cmd/head/head.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: head
+
+  - id: tail
+    main: ./cmd/tail/tail.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: tail
+
+  - id: tree
+    main: ./cmd/tree/tree.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: tree
+
+  - id: true
+    main: ./cmd/true/true.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: true
+
+  - id: wc
+    main: ./cmd/wc/wc.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: wc
+  
+  - id: yes
+    main: ./cmd/yes/yes.go
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    binary: yes
