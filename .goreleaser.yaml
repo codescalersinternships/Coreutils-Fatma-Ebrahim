@@ -5,10 +5,10 @@ project_name: coreutils-fatma-ebrahim
 before:
   hooks:
     - go mod tidy
+env:
+    - CGO_ENABLED=0
 
 builds:
-  - env:
-      - CGO_ENABLED=0
   - id: cat
     main: ./cmd/cat/cat.go
     goos:
