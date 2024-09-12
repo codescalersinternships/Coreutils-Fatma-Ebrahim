@@ -1,12 +1,14 @@
 version: 2
 
+project_name: coreutils-fatma-ebrahim
+
 before:
   hooks:
-    # Ensure your go.mod file is tidy before building
     - go mod tidy
-env:
-    - CGO_ENABLED=0
+
 builds:
+  - env:
+      - CGO_ENABLED=0
   - id: cat
     main: ./cmd/cat/cat.go
     goos:
