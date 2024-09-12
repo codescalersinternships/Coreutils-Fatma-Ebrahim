@@ -7,9 +7,9 @@ import (
 
 func main() {
 	flag.Parse()
-	repeat:= flag.Arg(0)
-	if repeat==""{
-		repeat="y"
+	repeat := flag.Arg(0)
+	if repeat == "" {
+		repeat = "y"
 	}
 	yes.Yes(repeat)
 

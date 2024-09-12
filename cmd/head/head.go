@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"log"
 	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/head"
+	"log"
 )
 
 func main() {

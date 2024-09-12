@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func Cat(n bool, scanner *bufio.Scanner)  {
+func Cat(n bool, scanner *bufio.Scanner) {
 	if scanner == nil {
 		linenumber := 1
 		for scanner.Scan() {

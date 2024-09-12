@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"strings"
 	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/echo"
+	"strings"
 )
 
 func main() {
