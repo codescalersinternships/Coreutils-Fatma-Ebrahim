@@ -6,11 +6,11 @@ import (
 	"os"
 )
 
-func Head(filename string, n int) error {
+func Head(filename string, n uint) error {
 
 	f, err := os.Open(filename)
 	if err != nil {
-		return fmt.Errorf("Can't open the file with path %q due error: %w", filename, err)
+		return fmt.Errorf("Can't open the file with path %q due to error: %w", filename, err)
 	}
 	defer f.Close()
 	scanner := bufio.NewScanner(f)

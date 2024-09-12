@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	n := false
+	var n bool
 	flag.BoolVar(&n, "n", false, "omit echoing trailing newline")
 	flag.Parse()
 	input := strings.Join(flag.Args(), " ")

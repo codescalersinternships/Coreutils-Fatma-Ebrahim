@@ -6,10 +6,10 @@ import (
 	"os"
 )
 
-func Tail(filename string, n int) error {
+func Tail(filename string, n uint) error {
 	f, err := os.Open(filename)
 	if err != nil {
-		return fmt.Errorf("Can't open the file with path %q due error: %w", filename, err)
+		return fmt.Errorf("Can't open the file with path %q due to error: %w", filename, err)
 	}
 	defer f.Close()
 	scanner := bufio.NewScanner(f)
@@ -17,10 +17,11 @@ func Tail(filename string, n int) error {
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
 	}
-	if n > len(lines) {
-		n = len(lines)
+
+	if n > uint(len(lines)) {
+		n = uint(len(lines))
 	}
-	for j := len(lines) - n; j < len(lines); j++ {
+	for j := uint(len(lines)) - n; j < uint(len(lines)); j++ {
 		fmt.Println(lines[j])
 	}
 	return nil

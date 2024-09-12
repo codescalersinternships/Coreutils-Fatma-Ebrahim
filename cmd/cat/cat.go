@@ -3,23 +3,23 @@ package main
 import (
 	"bufio"
 	"flag"
-	"fmt"
-	"os"
 	"github.com/codescalersinternships/Coreutils-Fatma-Ebrahim/internal/cat"
+	"log"
+	"os"
 )
 
 func main() {
-	n := false
+	var n bool
 	flag.BoolVar(&n, "n", false, "number output lines")
 	flag.Parse()
-	var scanner *bufio.Scanner
-	if len(flag.Args()) == 0 {
-		scanner = bufio.NewScanner(os.Stdin)
+	scanner := bufio.NewScanner(os.Stdin)
+	if len(flag.Args()) != 0 {
+		file, err := os.Open(flag.Arg(0))
+		if err != nil {
+			log.Fatal(err)
+		}
+		scanner = bufio.NewScanner(file)
 	}
+	cat.Cat(n, scanner)
 
-	filename := flag.Arg(0)
-	err := cat.Cat(filename, n, scanner)
-	if err != nil {
-		fmt.Print(err)
-	}
 }

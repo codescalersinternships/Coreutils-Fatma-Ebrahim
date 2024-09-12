@@ -7,16 +7,15 @@ import (
 	"strings"
 )
 
-func Wc(filename string, l, w, c bool, scanner *bufio.Scanner) error {
+func Wc(filename string, l, w, c bool) error {
 
 	linecount := 0
 	wordcount := 0
 	charcount := 0
-	if scanner == nil {
-
+	if filename != "" {
 		bytes, err := os.ReadFile(filename)
 		if err != nil {
-			return fmt.Errorf("Can't open the file with path %q due error: %w", filename, err)
+			return fmt.Errorf("Can't open the file with path %q due to error: %w", filename, err)
 		}
 		for _, e := range bytes {
 			if string(e) == "\n" {
@@ -26,9 +25,9 @@ func Wc(filename string, l, w, c bool, scanner *bufio.Scanner) error {
 		}
 		words := strings.Fields(string(bytes))
 		wordcount += len(words)
-		
 
 	} else {
+		scanner := bufio.NewScanner(os.Stdin)
 		for scanner.Scan() {
 			line := scanner.Text()
 			words := strings.Fields(line)
@@ -40,19 +39,18 @@ func Wc(filename string, l, w, c bool, scanner *bufio.Scanner) error {
 
 	if !l && !w && !c {
 		fmt.Println(linecount, wordcount, charcount, filename)
-
-	} else {
-		if l {
-			fmt.Print(linecount, "  ")
-		}
-		if w {
-			fmt.Print(wordcount, "  ")
-		}
-		if c {
-			fmt.Print(charcount, "  ")
-		}
-		fmt.Println(filename)
+		return nil
 	}
+	if l {
+		fmt.Print(linecount, "  ")
+	}
+	if w {
+		fmt.Print(wordcount, "  ")
+	}
+	if c {
+		fmt.Print(charcount, "  ")
+	}
+	fmt.Println(filename)
 
 	return nil
 
